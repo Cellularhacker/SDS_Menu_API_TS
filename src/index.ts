@@ -21,6 +21,7 @@ app.get("/:session/:cornerId", (req, res) => {
     if (isValid) {
       console.log(`SessionId(${session}) is Valid!`);
       console.log(`Searching CornerId(${cornerId})...`);
+      console.log(`typeof getCornerName -->`, typeof getCornerName);
       getCornerName(cornerId)
         .then(cornerName => {
           if (cornerName !== "") {
