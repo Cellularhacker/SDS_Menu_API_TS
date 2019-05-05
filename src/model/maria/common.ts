@@ -1,8 +1,8 @@
 import * as maria from "../../../conf/maria.json";
-import * as Knex from "knex";
+import * as knex from "knex";
 
 export default class Maria {
-  public conn: Knex;
+  public conn: knex;
   public readonly sdsCorner: SdsCorner = new SdsCorner();
   public readonly sessions: Sessions = new Sessions();
 
