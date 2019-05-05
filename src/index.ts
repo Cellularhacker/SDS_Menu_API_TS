@@ -16,11 +16,15 @@ app.use(bodyParser.json());
 app.get("/:session/:cornerId", (req, res) => {
   const session: string = req.params.session;
   const cornerId: string = req.params.cornerId;
+  console.log("Checking the session id is value...");
   isValidSession(session).then(isValid => {
     if (isValid) {
+      console.log(`SessionId(${session}) is Valid!`);
+      console.log(`Searching CornerId(${cornerId})...`);
       getCornerName(cornerId)
         .then(cornerName => {
           if (cornerName !== "") {
+            console.log(`corner id matched! ${cornerId}: ${cornerName}`);
             res.status(200);
             res.json({
               id: cornerId,
@@ -28,6 +32,7 @@ app.get("/:session/:cornerId", (req, res) => {
             });
             res.end();
           } else {
+            console.log(`no matched cornerId ${cornerId}`);
             res.status(404);
             res.json({
               Error: {
@@ -38,6 +43,7 @@ app.get("/:session/:cornerId", (req, res) => {
           }
         })
         .catch(err => {
+          console.log(`Failed to get cornerId: ${cornerId}`);
           res.status(500);
           res.json({
             Error: {
@@ -48,6 +54,7 @@ app.get("/:session/:cornerId", (req, res) => {
           });
         });
     } else {
+      console.log(`Invalid SessionId: ${session}`);
       res.status(403);
       res.json({
         Error: { reason: "Unauthorized SessionId" }
