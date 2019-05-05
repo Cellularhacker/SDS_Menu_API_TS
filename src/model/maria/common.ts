@@ -8,7 +8,7 @@ export default class Maria {
 
   constructor() {
     // @ts-ignore
-    this.conn = new knex(maria);
+    this.conn = knex(maria);
   }
 }
 
