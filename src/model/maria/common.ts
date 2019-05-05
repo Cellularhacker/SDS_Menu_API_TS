@@ -1,13 +1,15 @@
 const maria = require("../../../conf/maria.json");
-import * as knex from "knex";
+import Knex from "knex";
 
 export default class Maria {
-  public conn: knex;
+  public conn: Knex;
   public readonly sdsCorner: SdsCorner = new SdsCorner();
   public readonly sessions: Sessions = new Sessions();
 
   constructor() {
-    this.conn = knex(maria as knex.Config);
+    console.log(Knex);
+    console.log(`type: `, typeof Knex);
+    this.conn = Knex(maria as Knex.Config);
   }
 }
 
