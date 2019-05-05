@@ -13,7 +13,7 @@ app.all("/*", function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/:session/:cornerId", (req, res) => {
+app.get("/:session/:cornerId", (req, res) => {
   const session: string = req.params.session;
   const cornerId: string = req.params.cornerId;
   isValidSession(session).then(isValid => {
