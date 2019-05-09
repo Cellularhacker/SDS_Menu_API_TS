@@ -1,7 +1,7 @@
 import Maria from "../common";
 import { DicType } from "../../../types/maria";
 
-export default class SDSCorner {
+export default class SDSZone {
   private client: Maria;
 
   constructor() {
@@ -13,19 +13,15 @@ export default class SDSCorner {
       console.log(
         `query ===>`,
         this.client.conn
-          .select(
-            this.client.sdsCorner.CornerName,
-            this.client.sdsCorner.floor,
-            this.client.sdsCorner.location
-          )
-          .from(this.client.sdsCorner._t_name)
-          .where(this.client.sdsCorner.code, id)
+          .select(this.client.sdsZone.zoneName)
+          .from(this.client.sdsZone._t_name)
+          .where(this.client.sdsZone.zoneCode, id)
           .toSQL()
       );
       this.client.conn
-        .select(this.client.sdsCorner.CornerName)
-        .from(this.client.sdsCorner._t_name)
-        .where(this.client.sdsCorner.code, id)
+        .select(this.client.sdsZone.zoneName)
+        .from(this.client.sdsZone._t_name)
+        .where(this.client.sdsZone.zoneCode, id)
         .then(res => {
           console.log(`RES=>`, res);
           if (res > 0) {
