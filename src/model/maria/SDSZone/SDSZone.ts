@@ -1,4 +1,5 @@
 import Maria from "../common";
+import { DicType } from "../../../types/maria";
 
 export default class SDSZone {
   private client: Maria;
@@ -6,7 +7,7 @@ export default class SDSZone {
   constructor() {
     this.client = new Maria();
   }
-  public ask(id: string): Promise<string> {
+  public ask(id: string): Promise<DicType> {
     return new Promise((resolve, reject) => {
       console.log(`Inside of Function`);
       console.log(
@@ -24,9 +25,9 @@ export default class SDSZone {
         .then(res => {
           console.log(`RES=>`, res);
           if (res > 0) {
-            return resolve(res[0][this.client.sdsZone.zoneName]);
+            return resolve(res[0]);
           } else {
-            return resolve("");
+            return resolve({});
           }
         })
         .catch(err => {

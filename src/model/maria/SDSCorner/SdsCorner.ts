@@ -1,4 +1,5 @@
 import Maria from "../common";
+import { DicType } from "../../../types/maria";
 
 export default class SDSCorner {
   private client: Maria;
@@ -6,13 +7,21 @@ export default class SDSCorner {
   constructor() {
     this.client = new Maria();
   }
-  public ask(id: string): Promise<string> {
+  public ask(id: string): Promise<DicType> {
     return new Promise((resolve, reject) => {
       console.log(`Inside of Function`);
-      console.log(`query ===>`, this.client.conn
-          .select(this.client.sdsCorner.CornerName)
+      console.log(
+        `query ===>`,
+        this.client.conn
+          .select(
+            this.client.sdsCorner.CornerName,
+            this.client.sdsCorner.floor,
+            this.client.sdsCorner.location
+          )
           .from(this.client.sdsCorner._t_name)
-          .where(this.client.sdsCorner.code, id).toSQL());
+          .where(this.client.sdsCorner.code, id)
+          .toSQL()
+      );
       this.client.conn
         .select(this.client.sdsCorner.CornerName)
         .from(this.client.sdsCorner._t_name)
@@ -20,9 +29,9 @@ export default class SDSCorner {
         .then(res => {
           console.log(`RES=>`, res);
           if (res > 0) {
-            return resolve(res[0][this.client.sdsCorner.CornerName]);
+            return resolve(res[0]);
           } else {
-            return resolve("");
+            return resolve({});
           }
         })
         .catch(err => {

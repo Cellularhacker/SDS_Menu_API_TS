@@ -25,14 +25,11 @@ app.get("/:session/corner/:cornerId", (req, res) => {
       console.log(`Searching CornerId(${cornerId})...`);
       console.log(`typeof getCornerName -->`, typeof getCornerName);
       getCornerName(cornerId)
-        .then(cornerName => {
-          if (cornerName !== "") {
-            console.log(`corner id matched! ${cornerId}: ${cornerName}`);
+        .then(cornerObject => {
+          if (Object.keys(cornerObject).length < 1) {
+            console.log(`corner id matched! ${cornerId}:`, cornerObject);
             res.status(200);
-            res.json({
-              id: cornerId,
-              name: cornerName
-            });
+            res.json(cornerObject);
             res.end();
           } else {
             console.log(`no matched cornerId ${cornerId}`);
@@ -77,14 +74,11 @@ app.get("/:session/zone/:zoneId", (req, res) => {
       console.log(`SessionId(${session}) is Valid!`);
       console.log(`Searching CornerId(${zoneId})...`);
       getZoneName(zoneId)
-        .then(cornerName => {
-          if (cornerName !== "") {
-            console.log(`corner id matched! ${zoneId}: ${cornerName}`);
+        .then(zoneObject => {
+          if (Object.keys(zoneObject).length < 1) {
+            console.log(`corner id matched! ${zoneId}: `, zoneObject);
             res.status(200);
-            res.json({
-              id: zoneId,
-              name: cornerName
-            });
+            res.json(zoneObject);
             res.end();
           } else {
             console.log(`no matched zoneId ${zoneId}`);

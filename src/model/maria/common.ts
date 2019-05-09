@@ -19,6 +19,7 @@ class SdsCorner {
   public readonly pk: string = "pk";
   public readonly code: string = "code";
   public readonly CornerName: string = "name";
+  public readonly floor: string = "floor";
   public readonly location: string = "location";
   public readonly createdAt: string = "created_at";
 }
